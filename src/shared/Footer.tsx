@@ -2,13 +2,14 @@ import { Roboto } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const roboto = Roboto({
   weight: "400",
   subsets: ["latin"],
 });
 
-const Footer: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const Footer = () => {
   return (
     <footer className={`${roboto.className} bg-gray-50`}>
       <div className="container px-6 py-8 mx-auto">
