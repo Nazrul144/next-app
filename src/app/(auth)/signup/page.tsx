@@ -1,8 +1,11 @@
+import Signup from '@/pages/Authentication/Signup'
 import React from 'react'
 
 const SignupPage = () => {
   return (
-    <div>SignupPage</div>
+    <div>
+      <Signup/>
+    </div>
   )
 }
 
