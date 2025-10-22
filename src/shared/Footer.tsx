@@ -2,7 +2,6 @@ import { Roboto } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 const roboto = Roboto({
   weight: "400",
