@@ -6,8 +6,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
+import { MdNavigateNext } from "react-icons/md";
 import z from "zod";
 
 const formSchema = z.object({
@@ -43,6 +45,10 @@ const formSchema = z.object({
 });
 
 const Signup = () => {
+
+  const router = useRouter()
+  
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -58,8 +64,9 @@ const Signup = () => {
   });
 
   const handleFormSubmit = (data: any) => {
-    console.log(data);
-    form.reset()   //Form has been clear after submit the form.
+    console.log(data);  
+    form.reset()  //Form has been clear after submit the form.
+    router.push("/signup/step2")
   };
 
   return (
@@ -181,8 +188,8 @@ const Signup = () => {
             )}
           />
 
-          <Button className="w-full mt-4 cursor-pointer" type="submit">
-            Submit
+          <Button className="w-full mt-4 cursor-pointer flex items-center" type="submit">
+            Next <MdNavigateNext size={30} className="mt-1"/>
           </Button>
         </form>
       </Form>
