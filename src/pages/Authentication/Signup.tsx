@@ -5,9 +5,10 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { FormContext } from "@/providers/FormProvider";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { MdNavigateNext } from "react-icons/md";
 import z from "zod";
@@ -47,6 +48,7 @@ const formSchema = z.object({
 const Signup = () => {
 
   const router = useRouter()
+  const { setFormData} = useContext(FormContext)
   
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -66,8 +68,12 @@ const Signup = () => {
   const handleFormSubmit = (data: any) => {
     console.log(data);  
     form.reset()  //Form has been clear after submit the form.
+    setFormData(data)
     router.push("/signup/step2")
   };
+
+  
+ 
 
   return (
     <div className="w-96 mx-auto border-1 border-red-400 rounded-lg py-4 px-6 mt-8">
