@@ -1,4 +1,5 @@
 "use client";
+import ModeToggle from "@/components/ModeToggle";
 import { Button } from "@/components/ui/button";
 import { NavigationMenu, NavigationMenuList } from "@/components/ui/navigation-menu";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -16,10 +17,9 @@ const playfair = Playfair_Display({
 });
 
 const roboto = Roboto({
-  weight: ["400","500", "600", "700", "800", "900"],
+  weight: ["400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
 });
-
 
 const Navbar = () => {
   const pathName = usePathname();
@@ -35,7 +35,7 @@ const Navbar = () => {
   const handleLinkClick = () => setOpen(false); // ← close dropdown after click
 
   return (
-    <div className={`text-lg ${playfair.className} fixed top-0 left-0 w-full border-b bg-white z-50`}>
+    <div className={`text-lg ${playfair.className} fixed top-0 left-0 w-full border-b  z-50`}>
       <header className="border-b px-4 md:px-12">
         <div className="flex h-16 items-center justify-between gap-4">
           {/* Left side */}
@@ -80,7 +80,11 @@ const Navbar = () => {
                         key={link.path}
                         href={link.path}
                         onClick={handleLinkClick} // ← auto close after navigation
-                        className={`${playfair.className} ${pathName === link.path ? "bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text text-transparent font-bold" : ""}`}
+                        className={`${playfair.className} ${
+                          pathName === link.path
+                            ? "bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text text-transparent font-bold"
+                            : ""
+                        }`}
                       >
                         {link.title}
                       </Link>
@@ -99,7 +103,9 @@ const Navbar = () => {
                   </Link>
                 </div>
                 <div>
-                  <h1 className={`${roboto.className} text-2xl lg:text-4xl bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text text-transparent font-extrabold`}>
+                  <h1
+                    className={`${roboto.className} text-2xl lg:text-4xl bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text text-transparent font-extrabold hidden lg:block`}
+                  >
                     NextApp
                   </h1>
                 </div>
@@ -110,9 +116,16 @@ const Navbar = () => {
                     <Link
                       key={link.path}
                       href={link.path}
-                      className={`hover:bg-gray-200 px-2 py-1 rounded-lg transition ease-in ${
-                        pathName === link.path ? "bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text text-transparent bg-gray-200" : ""
-                      }`}
+                      className={`relative px-2 py-1 rounded-lg overflow-hidden
+                     after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px]
+                     after:bg-gradient-to-r after:from-purple-600 after:via-pink-600 after:to-orange-500
+                     after:transition-all after:duration-300 hover:after:w-full
+                     ${
+                       pathName === link.path
+                         ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 after:w-full"
+                         : "text-gray-800 dark:text-gray-200"
+                     }
+                   `}
                     >
                       {link.title}
                     </Link>
@@ -124,26 +137,25 @@ const Navbar = () => {
 
           {/* Right side */}
           <div className="flex items-center gap-2">
-          <Link
+            <Link
               href="/login"
-              className="w-full lg:px-3 py-2 text-sm tracking-wide text-white capitalize rounded-md sm:mx-2 sm:order-2 sm:w-auto
+              className="min-w-[80px]  lg:px-2 py-2 text-sm tracking-wide text-white capitalize rounded-md sm:mx-2 sm:order-2 sm:w-auto
              bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500
-             transition-all duration-300 transform hover:scale-105 hover:text-yellow-100 focus:outline-none focus:ring-4 focus:ring-purple-300"
+             transition-all duration-300 transform hover:scale-105 hover:text-yellow-100 focus:outline-none focus:ring-4 focus:ring-purple-300 text-center"
             >
               Sign In
             </Link>
-          <Link
+            <Link
               href="/signup"
-              className="w-full lg:px-3 py-2 text-sm tracking-wide text-white capitalize rounded-md sm:mx-2 sm:order-2 sm:w-auto
+              className="min-w-[100px] px-2 lg:px-3 py-2 text-sm tracking-wide text-white text-center capitalize rounded-md sm:mx-2 sm:order-2 sm:w-auto
              bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500
              transition-all duration-300 transform hover:scale-105 hover:text-yellow-100 focus:outline-none focus:ring-4 focus:ring-purple-300"
             >
-               Get started
+              Get started
             </Link>
-           
-            <Button asChild size="sm" className="text-sm">
-              
-            </Button>
+            <div>
+              <ModeToggle />
+            </div>
           </div>
         </div>
       </header>
