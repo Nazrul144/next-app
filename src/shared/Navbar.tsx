@@ -125,12 +125,12 @@ const Navbar = () => {
           {/* Right side */}
           <div className="flex items-center gap-2">
           <Link
-              href="/signup"
+              href="/login"
               className="w-full lg:px-3 py-2 text-sm tracking-wide text-white capitalize rounded-md sm:mx-2 sm:order-2 sm:w-auto
              bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500
              transition-all duration-300 transform hover:scale-105 hover:text-yellow-100 focus:outline-none focus:ring-4 focus:ring-purple-300"
             >
-              Signin
+              Sign In
             </Link>
           <Link
               href="/signup"

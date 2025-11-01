@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { FormContext } from "@/providers/FormProvider";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
@@ -193,8 +194,10 @@ const Signup = () => {
               </FormItem>
             )}
           />
+            <span className="text-sm ">Already have an account? <Link className="font-bold text-blue-500" href="/login">Signin</Link></span>
 
-          <Button className="w-full mt-4 cursor-pointer flex items-center" type="submit">
+          <Button className="w-full cursor-pointer mt-4 text-white capitalize rounded-md
+             bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500" type="submit">
             Next <MdNavigateNext size={30} className="mt-1"/>
           </Button>
         </form>
