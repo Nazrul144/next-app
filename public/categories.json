@@ -1,0 +1,188 @@
+{
+    "categories": [
+      {
+        "id": 1,
+        "name": "Football",
+        "image": "/images/categories/football.jpg",
+        "subcategories": [
+          {
+            "id": 101,
+            "brand": "Nike",
+            "items": [
+              {
+                "id": 1001,
+                "name": "Nike Mercurial Vapor 15",
+                "image": "/images/football/nike-mercurial.jpg",
+                "price": 179.99,
+                "description": "High-speed football boots built for explosive acceleration and control.",
+                "rating": 4.8,
+                "stock": 25
+              },
+              {
+                "id": 1002,
+                "name": "Nike Flight Ball",
+                "image": "/images/football/nike-flight-ball.jpg",
+                "price": 129.99,
+                "description": "Official Nike match ball used in top-tier leagues, designed for true flight.",
+                "rating": 4.7,
+                "stock": 30
+              }
+            ]
+          },
+          {
+            "id": 102,
+            "brand": "Adidas",
+            "items": [
+              {
+                "id": 1003,
+                "name": "Adidas Predator Accuracy",
+                "image": "/images/football/adidas-predator.jpg",
+                "price": 199.99,
+                "description": "Precision boots with enhanced grip and power control for elite players.",
+                "rating": 4.9,
+                "stock": 20
+              },
+              {
+                "id": 1004,
+                "name": "Adidas Al Rihla Ball",
+                "image": "/images/football/adidas-al-rihla.jpg",
+                "price": 120.0,
+                "description": "Official FIFA World Cup 2022 match ball featuring aerodynamic panel design.",
+                "rating": 4.8,
+                "stock": 40
+              }
+            ]
+          },
+          {
+            "id": 103,
+            "brand": "Puma",
+            "items": [
+              {
+                "id": 1005,
+                "name": "Puma Ultra Ultimate",
+                "image": "/images/football/puma-ultra.jpg",
+                "price": 159.99,
+                "description": "Lightweight boots made for pure speed and agility on firm ground.",
+                "rating": 4.6,
+                "stock": 15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Cricket",
+        "image": "/images/categories/cricket.jpg",
+        "subcategories": [
+          {
+            "id": 201,
+            "brand": "Gray-Nicolls",
+            "items": [
+              {
+                "id": 2001,
+                "name": "Gray-Nicolls Powerbow Bat",
+                "image": "/images/cricket/powerbow-bat.jpg",
+                "price": 349.99,
+                "description": "Premium English willow bat designed for power hitters.",
+                "rating": 4.9,
+                "stock": 10
+              }
+            ]
+          },
+          {
+            "id": 202,
+            "brand": "Kookaburra",
+            "items": [
+              {
+                "id": 2002,
+                "name": "Kookaburra Kahuna Pro",
+                "image": "/images/cricket/kahuna-bat.jpg",
+                "price": 399.99,
+                "description": "Used by top players, delivers balanced pickup and explosive stroke play.",
+                "rating": 4.7,
+                "stock": 18
+              },
+              {
+                "id": 2003,
+                "name": "Kookaburra Turf Ball",
+                "image": "/images/cricket/kookaburra-ball.jpg",
+                "price": 45.0,
+                "description": "Professional-grade leather cricket ball for match-level performance.",
+                "rating": 4.6,
+                "stock": 100
+              }
+            ]
+          },
+          {
+            "id": 203,
+            "brand": "SG",
+            "items": [
+              {
+                "id": 2004,
+                "name": "SG Test Batting Gloves",
+                "image": "/images/cricket/sg-gloves.jpg",
+                "price": 59.99,
+                "description": "High protection gloves made with premium leather and foam padding.",
+                "rating": 4.5,
+                "stock": 60
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Chess",
+        "image": "/images/categories/chess.jpg",
+        "subcategories": [
+          {
+            "id": 301,
+            "brand": "DGT",
+            "items": [
+              {
+                "id": 3001,
+                "name": "DGT Smart Board",
+                "image": "/images/chess/dgt-smartboard.jpg",
+                "price": 349.99,
+                "description": "Electronic chessboard with Bluetooth connectivity for live game tracking.",
+                "rating": 4.8,
+                "stock": 12
+              }
+            ]
+          },
+          {
+            "id": 302,
+            "brand": "House of Staunton",
+            "items": [
+              {
+                "id": 3002,
+                "name": "Staunton Tournament Chess Set",
+                "image": "/images/chess/staunton-set.jpg",
+                "price": 249.99,
+                "description": "Luxury wooden chess set crafted for professional tournaments.",
+                "rating": 4.9,
+                "stock": 8
+              }
+            ]
+          },
+          {
+            "id": 303,
+            "brand": "ChessBazaar",
+            "items": [
+              {
+                "id": 3003,
+                "name": "Travel Magnetic Chess Set",
+                "image": "/images/chess/magnetic-set.jpg",
+                "price": 39.99,
+                "description": "Compact magnetic chess set ideal for travel and casual play.",
+                "rating": 4.5,
+                "stock": 100
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  

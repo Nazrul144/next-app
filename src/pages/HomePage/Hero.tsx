@@ -77,7 +77,7 @@ const Hero = () => {
                           <Input
                             placeholder="Search for football, basketball, badminton..."
                             {...field}
-                            className="w-full h-12 px-6 rounded-full border-none text-black bg-transparent !placeholder-gray-900 appearance-none focus:outline-none focus:ring-2 focus:ring-green-400/70 transition-all duration-300 font-semibold"
+                            className="w-full h-4 px-6 rounded-full border-none text-black bg-transparent !placeholder-gray-900 appearance-none focus:outline-none focus:ring-2 focus:ring-green-400/70 transition-all duration-300 font-semibold"
                           />
                         </FormControl>
                         {/* <FormMessage /> */}

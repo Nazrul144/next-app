@@ -1,13 +1,14 @@
 "use client";
 import ModeToggle from "@/components/ModeToggle";
 import { Button } from "@/components/ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { NavigationMenu, NavigationMenuList } from "@/components/ui/navigation-menu";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Playfair_Display, Roboto } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // Font using:
 const playfair = Playfair_Display({
@@ -21,19 +22,52 @@ const roboto = Roboto({
   subsets: ["latin"],
 });
 
+type Item = {
+  id: number;
+  name: string;
+  image: string;
+  price: number;
+  description: string;
+  rating: number;
+  stock: number;
+};
+
+type Subcategory = {
+  id: number;
+  brand: string;
+  items: Item[];
+};
+
+type Category = {
+  id: number;
+  name: string;
+  image: string;
+  subcategories: Subcategory[];
+};
+
 const Navbar = () => {
   const pathName = usePathname();
   const [open, setOpen] = useState(false); // ← control Popover manually
 
   const navigationLinks = [
     { title: "Home", path: "/" },
-    { title: "Features", path: "/feature" },
+    { title: "Features" },
     { title: "About", path: "/about" },
     { title: "Contact", path: "/contact" },
   ];
 
-  const handleLinkClick = () => setOpen(false); // ← close dropdown after click
+  const [categories, setCategories] = useState<Category[]>([]);
 
+  useEffect(() => {
+    const getAllCategories = async () => {
+      const res = await fetch("/categories.json");
+      const data = await res.json();
+      setCategories(data.categories);
+    };
+    getAllCategories();
+  }, []);
+
+  console.log(categories);
   return (
     <div className={`text-lg ${playfair.className} fixed top-0 left-0 w-full border-b  z-50`}>
       <header className="border-b px-4 md:px-12">
@@ -74,21 +108,25 @@ const Navbar = () => {
 
               <PopoverContent align="start" className="w-36 p-1 md:hidden">
                 <NavigationMenu className="max-w-none *:w-full">
-                  <NavigationMenuList className="flex-col items-start gap-0 md:gap-2">
-                    {navigationLinks.map((link) => (
-                      <Link
-                        key={link.path}
-                        href={link.path}
-                        onClick={handleLinkClick} // ← auto close after navigation
-                        className={`${playfair.className} ${
-                          pathName === link.path
-                            ? "bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 bg-clip-text text-transparent font-bold"
-                            : ""
-                        }`}
-                      >
-                        {link.title}
-                      </Link>
-                    ))}
+                  <NavigationMenuList className="flex flex-col md:flex-row gap-4">
+                    {navigationLinks?.map((navigationLink) =>
+                      navigationLink.title === "Features" ? (
+                        <DropdownMenu key={navigationLink.path}>
+                          <DropdownMenuTrigger>{navigationLink.title}</DropdownMenuTrigger>
+                          <DropdownMenuContent className="flex flex-col">
+                            {categories?.map((category) => (
+                              <DropdownMenuItem key={category.id}>
+                                <Link href={`/categories/${category.id}`}>{category.name}</Link>
+                              </DropdownMenuItem>
+                            ))}
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      ) : (
+                        <Link key={navigationLink.path} href={navigationLink.path ?? "#"}>
+                          {navigationLink.title}
+                        </Link>
+                      )
+                    )}
                   </NavigationMenuList>
                 </NavigationMenu>
               </PopoverContent>
@@ -112,24 +150,50 @@ const Navbar = () => {
               </div>
               <NavigationMenu className="max-md:hidden">
                 <NavigationMenuList className="gap-4">
-                  {navigationLinks.map((link) => (
-                    <Link
-                      key={link.path}
-                      href={link.path}
-                      className={`relative px-2 py-1 rounded-lg overflow-hidden
-                     after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px]
-                     after:bg-gradient-to-r after:from-purple-600 after:via-pink-600 after:to-orange-500
-                     after:transition-all after:duration-300 hover:after:w-full
-                     ${
-                       pathName === link.path
-                         ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 after:w-full"
-                         : "text-gray-800 dark:text-gray-200"
-                     }
-                   `}
-                    >
-                      {link.title}
-                    </Link>
-                  ))}
+                  {navigationLinks?.map((navigationLink) =>
+                    navigationLink.title === "Features" ? (
+                      <DropdownMenu key={navigationLink.path}>
+                        <DropdownMenuTrigger
+                          className={`relative px-2 py-1 rounded-lg overflow-hidden
+                        after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px]
+                        after:bg-gradient-to-r after:from-purple-600 after:via-pink-600 after:to-orange-500
+                        after:transition-all after:duration-300 hover:after:w-full
+                        ${
+                          pathName === navigationLink.path
+                            ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 after:w-full"
+                            : "text-gray-800 dark:text-gray-200"
+                        }
+                      `}
+                        >
+                          {navigationLink.title}
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                          {categories?.map((category) => (
+                            <DropdownMenuItem key={category.id}>
+                              <Link href={`/categories/${category.id}`}>{category.name}</Link>
+                            </DropdownMenuItem>
+                          ))}
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    ) : (
+                      <Link
+                        href={navigationLink.path ?? "#"}
+                        key={navigationLink.path}
+                        className={`relative px-2 py-1 rounded-lg overflow-hidden
+                        after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-[2px]
+                        after:bg-gradient-to-r after:from-purple-600 after:via-pink-600 after:to-orange-500
+                        after:transition-all after:duration-300 hover:after:w-full
+                        ${
+                          pathName === navigationLink.path
+                            ? "text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-600 to-orange-500 after:w-full"
+                            : "text-gray-800 dark:text-gray-200"
+                        }
+                      `}
+                      >
+                        {navigationLink.title}
+                      </Link>
+                    )
+                  )}
                 </NavigationMenuList>
               </NavigationMenu>
             </div>
